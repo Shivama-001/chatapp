@@ -14,12 +14,16 @@ const ProfilePage = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     if(!selectedImg){
+      // If no new image is selected, just update the profile with the existing profile picture and new name and bio
       await updateProfile({fullName: name, bio})
        navigate('/')
        return;
     }
+
+    // If a new image is selected, convert it to base64 and update the profile with the new image, name and bio
     const render = new FileReader();
     render.readAsDataURL(selectedImg)
+    // On successful conversion of image to base64, call updateProfile function from context to update the profile and navigate to home page
     render.onload = async () =>{
       const base64Image = render.result;
       await updateProfile({profilePic: base64Image, fullName: name, bio})

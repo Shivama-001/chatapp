@@ -3,13 +3,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
+
+// Set the base URL for axios from environment variable
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//backendUrl is now read from environment variable, so it can be easily configured for different environments (development, production, etc.)
 axios.defaults.baseURL = backendUrl;
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
+  //state variables for authentication, user data, online users and socket connection
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authUser, setAuthUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -19,6 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
+      //api call to check if the user is authenticated and get the user data
       const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
@@ -91,7 +96,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Connect socket
+  // Connect socket function to establish socket connection and listen for online users updates
   const connectSocket = (userData) => {
 
     if (!userData || socket?.connected) return;

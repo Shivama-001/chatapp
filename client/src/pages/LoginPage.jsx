@@ -20,6 +20,7 @@ const LoginPage = () => {
       return ;
     }
 
+    /// call login function from context to perform login or signup based on current state
     login(currState === "Sign up" ? 'signup' : 'login', {fullName, email, password, bio})
 
   }

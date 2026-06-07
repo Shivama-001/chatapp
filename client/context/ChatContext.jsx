@@ -35,10 +35,12 @@ export const ChatProvider = ({ children}) =>{
 
       const getMessages = async (userId)=>{
         try {
+            //api call to get messages for selected user and set the messages state
             const { data } = await axios.get(`/api/messages/${userId}`)
             if (data.success){
                 setMessages(data.messages)
             }
+
 
 
         } catch (error) {
@@ -49,8 +51,11 @@ export const ChatProvider = ({ children}) =>{
       // function to send message to selected user
       const sendMessage = async (messageData)=>{
         try {
+            //api call to send message to selected user and on success, add the new message to messages state
             const { data } = await axios.post(`/api/messages/send/${selectedUser._id}`, messageData);
+            // if message is sent successfully, the new message will be added to messages state through socket event listener, so no need to add it here again. But we can show a toast message on successful sending of message.
             if(data.success){
+                //
                 setMessages((prevMessages)=>[...prevMessages, data.newMessage])
             }else{
                 toast.error(data.message);
