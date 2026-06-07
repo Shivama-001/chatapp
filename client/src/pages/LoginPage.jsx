@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   const {login} = useContext(AuthContext)
 
-  const onSubmitHandler = (event)=>{
+  const onSubmitHandler = (event) => {
 
     event.preventDefault();
     if(currState === 'Sign up' && !isDataSubmitted){
@@ -38,13 +38,13 @@ const LoginPage = () => {
   onSubmit={onSubmitHandler}
   className="border-2 bg-white/8 text-white p-6 flex border-gray-500 flex-col gap-6 rounded-lg shadow-lg"
 >
-  <h2 className="font-medium text-2xl text-black flex justify-between items-center">
+  <h2 className="font-medium text-2xl text-white-50 text-center flex justify-between items-center ">
     {currState}
 
     {isDataSubmitted && (
       <img
         onClick={() => setIsDataSubmitted(false)}
-        src="/src/assets/arrow_icon.png"
+       src="/src/assets/arrow_icon.png"
         className="w-5 cursor-pointer"
       />
     )}
@@ -56,7 +56,7 @@ const LoginPage = () => {
       onChange={(e) => setFullName(e.target.value)}
       value={fullName}
       type="text"
-      className="p-2 border border-gray-500 rounded-md focus:outline-none text-black"
+      className="p-2 border border-gray-500 rounded-md focus:outline-none text-black "
       placeholder="Full Name"
       required
     />

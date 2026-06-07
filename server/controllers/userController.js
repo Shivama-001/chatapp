@@ -27,6 +27,8 @@ export const signup = async (req, res) => {
       })
     }
 
+
+    ///convert password into hash
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
@@ -83,6 +85,7 @@ export const login = async (req, res) => {
       })
     }
 
+    ////
     const isPasswordCorrect = await bcrypt.compare(
       password,
       userData.password

@@ -14,8 +14,9 @@ export const getUsersForSidebar = async (req, res) => {
       _id: { $ne: userId }
     }).select("-password");
 
+    
+    // count number of unseen msg
     const unseenMessage = {};
-
     const promises = filteredUsers.map(async (user) => {
 
       const messages = await Message.find({

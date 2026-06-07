@@ -20,7 +20,7 @@ const ChatContainer = () => {
 
     await sendMessage({
       text: input.trim(),
-      receiverId: selectedUser._id   // ✅ FIX
+      receiverId: selectedUser._id   //  FIX
     })
 
     setInput("")
@@ -42,7 +42,7 @@ const ChatContainer = () => {
 
       await sendMessage({
         image: reader.result,
-        receiverId: selectedUser._id   // ✅ FIX
+        receiverId: selectedUser._id   //  FIX
       })
 
       e.target.value = ""

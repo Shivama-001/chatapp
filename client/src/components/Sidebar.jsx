@@ -28,8 +28,7 @@ const Sidebar = () => {
   }, [onlineUsers]);
 
   return (
-    <div
-      className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white ${
+    <div className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white ${
         selectedUser ? "max-md:hidden" : ""
       }`}
     >
@@ -59,6 +58,7 @@ const Sidebar = () => {
                 Logout
               </p>
             </div>
+
           </div>
         </div>
 
@@ -75,7 +75,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Users List */}
+      {/* users list where all user are persents */}
       <div className="flex flex-col">
         {filteredUsers?.map((user) => (
           <div
@@ -85,7 +85,7 @@ const Sidebar = () => {
               selectedUser?._id === user._id ? "bg-[#282142]/50" : ""
             }`}
           >
-            {/* Profile Image */}
+            {/* profile Image of users*/}
             <div className="relative">
               <img
                 src={user?.profilePic || "/src/assets/avatar_icon.png"}
@@ -93,13 +93,13 @@ const Sidebar = () => {
                 className="w-[35px] aspect-square rounded-full"
               />
 
-              {/* Online Indicator */}
+              {/* online indicator show result */}
               {onlineUsers?.includes(user._id) && (
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border border-black"></span>
               )}
             </div>
 
-            {/* User Info */}
+            {/* User information indication */}
             <div className="flex flex-col leading-5">
               <p>{user.fullName}</p>
 
@@ -110,7 +110,7 @@ const Sidebar = () => {
               )}
             </div>
 
-            {/* Unseen Messages */}
+            {/* unseen messages record*/}
             {unseenMessages?.[user._id] > 0 &&
               <p className="absolute top-4 right-4 text-xs h-5 w-5 flex justify-center items-center rounded-full bg-blue-500/50">
                 {unseenMessages[user._id]}

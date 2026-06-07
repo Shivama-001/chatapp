@@ -19,7 +19,7 @@ export const io = new Server(server, {
   }
 });
 
-// Store online users
+// Store online user data
 export const userSocketMap = {}; // { userId: socketId }
 
 // Socket connection handler
@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
     console.log("User Disconnected:", userId);
 
     delete userSocketMap[userId];
-
+    //emit online users to all connected clients 
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
@@ -56,7 +56,7 @@ app.use(cors({
   credentials: true
 }));
 
-// Routes
+// Routes setup
 app.use("/api/status", (req, res) => res.send("Server is Live"));
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
