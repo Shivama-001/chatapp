@@ -8,6 +8,7 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 
+////setup server
 const app = express();
 const server = http.createServer(app);
 
@@ -43,7 +44,7 @@ io.on("connection", (socket) => {
     console.log("User Disconnected:", userId);
 
     delete userSocketMap[userId];
-    //emit online users to all connected clients 
+    //emit online users to all connected clients
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
@@ -66,11 +67,16 @@ await connectDB();
 
 // Start server
 
-if(process.env.NODE_ENV !== "production"){
+// if(process.env.NODE_ENV !== "production"){
+// const PORT = process.env.PORT || 5000;
+
+// server.listen(PORT, () => {
+//   console.log(`Server is running on PORT: ${PORT}`);
+// });
+
+// }
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
 });
-
-}

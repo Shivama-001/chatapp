@@ -1,5 +1,7 @@
 1.bcriyptjs--for bcryipt the password
+
 2.cors--allow any backend to frontend
+
 3.dotenv- enviroment variable
 4.express
 5.jsonwebtoken- genrate token foe authntication
