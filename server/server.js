@@ -61,7 +61,6 @@ app.use(cors({
   credentials: true
 }));
 
-
 // Routes
 app.get("/api/status", (req, res) => {
   res.send("Server is Live");
@@ -73,7 +72,7 @@ app.use("/api/messages", messageRouter);
 // Connect Database
 await connectDB();
 
-//Start server (Local Development)
+// Start server (Local Development)
 if (process.env.NODE_ENV !== "production") {
 
   const PORT = process.env.PORT || 5000;
@@ -83,7 +82,6 @@ if (process.env.NODE_ENV !== "production") {
   });
 
 }
-
 
 // Export for Vercel
 export default server;
