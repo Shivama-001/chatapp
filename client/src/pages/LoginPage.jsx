@@ -76,6 +76,7 @@ const LoginPage = () => {
       />
 
       <input
+        autoComplete="current-password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         type="password"
