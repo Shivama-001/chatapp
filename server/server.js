@@ -13,18 +13,19 @@ const app = express();
 const server = http.createServer(app);
 
 // Socket.io setup
-// export const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:5173",
-//     methods: ["GET", "POST"]
-//   }
-// });
-export const io = new Server(server,{
-  cors:{
-  origin: process.env.CLIENT_URL,
-  credentials:true
-}
-})
+
+export const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"]
+  }
+});
+// export const io = new Server(server,{
+//   cors:{
+//   origin: process.env.CLIENT_URL,
+//   credentials:true
+// }
+// })
 
 // Store online user data
 export const userSocketMap = {}; // { userId: socketId }
@@ -38,7 +39,7 @@ io.on("connection", (socket) => {
 
   // Store user socket id
   if (userId) {
-    userSocketMap[userId] = socket.id;   // ✅ FIXED
+    userSocketMap[userId] = socket.id;   //  FIXED
   }
 
   // Send online users list to all clients
@@ -58,10 +59,10 @@ io.on("connection", (socket) => {
 // Middleware
 app.use(express.json({ limit: "4mb" }));
 
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
-}))
+// app.use(cors({
+//   origin: process.env.CLIENT_URL,
+//   credentials: true
+// }))
 // app.use(cors({
 //   origin: [
 //     "http://localhost:5173",
@@ -69,10 +70,10 @@ app.use(cors({
 //   ],
 //   credentials: true
 // }))
-// app.use(cors({
-//   origin: "http://localhost:5173",
-//   credentials: true
-// }));
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 // Routes setup
 app.use("/api/status", (req, res) => res.send("Server is Live"));
