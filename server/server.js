@@ -60,16 +60,7 @@ app.use(cors({
   ],
   credentials: true
 }));
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
-export const io = new Server(server, {
-  cors: {
-    origin: true,
-    credentials: true
-  }
-});
+
 
 // Routes
 app.get("/api/status", (req, res) => {
