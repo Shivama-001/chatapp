@@ -80,8 +80,8 @@ const ChatContainer = () => {
 
         </p>
 
-        <img onClick={()=>setSelectedUser(null)} src="/src/assets/arrow_icon.png" className="md:hidden max-w-7"/>
-        <img src="/src/assets/help_icon.png" className="max-md:hidden max-w-7"/>
+        <img onClick={()=>setSelectedUser(null)} src="/arrow_icon.png" className="md:hidden max-w-7"/>
+        <img src="/help_icon.png" className="max-md:hidden max-w-7"/>
       </div>
 
       {/* Chat Area */}
@@ -133,12 +133,12 @@ const ChatContainer = () => {
           />
 
           <label htmlFor="image">
-            <img src="/src/assets/gallery_icon.svg" className="w-5 mr-2 cursor-pointer"/>
+            <img src="/gallery_icon.svg" className="w-5 mr-2 cursor-pointer"/>
           </label>
 
         </div>
 
-        <img onClick={handleSendMessage} src="/src/assets/send_button.svg" className="w-7 cursor-pointer"/>
+        <img onClick={handleSendMessage} src="/send_button.svg" className="w-7 cursor-pointer"/>
 
       </div>
 
@@ -147,7 +147,7 @@ const ChatContainer = () => {
   ) : (
 
     <div className="flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden">
-      <img src="/src/assets/logo_icon.svg" className="max-w-16"/>
+      <img src="/logo_icon.svg" className="max-w-16"/>
       <p className="text-lg font-medium text-white">Chat anytime, anywhere</p>
     </div>
 

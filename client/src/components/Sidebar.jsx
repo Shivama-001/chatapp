@@ -35,11 +35,11 @@ const Sidebar = () => {
       {/* Top Section */}
       <div className="pb-5">
         <div className="flex justify-between items-center">
-          <img src="/src/assets/logo.png" alt="logo" className="max-w-40" />
+          <img src="/logo.png" alt="logo" className="max-w-40" />
 
           <div className="relative py-2 group">
             <img
-              src="/src/assets/menu_icon.png"
+              src="/menu_icon.png"
               alt="Menu"
               className="max-h-5 cursor-pointer"
             />
@@ -64,7 +64,7 @@ const Sidebar = () => {
 
         {/* Search Bar */}
         <div className="bg-[#282142] rounded-full flex items-center gap-2 py-3 px-4 mt-5">
-          <img src="/src/assets/search_icon.png" className="w-3" />
+          <img src="/search_icon.png" className="w-3" />
 
           <input
             onChange={(e) => setInput(e.target.value)}
