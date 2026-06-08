@@ -8,26 +8,23 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 
-////setup server
+// Setup server
 const app = express();
 const server = http.createServer(app);
 
 // Socket.io setup
-
 export const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:5173",
+      process.env.CLIENT_URL
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
-// export const io = new Server(server,{
-//   cors:{
-//   origin: process.env.CLIENT_URL,
-//   credentials:true
-// }
-// })
 
-// Store online user data
+// Store online users
 export const userSocketMap = {}; // { userId: socketId }
 
 // Socket connection handler
@@ -37,21 +34,18 @@ io.on("connection", (socket) => {
 
   console.log("User Connected:", userId);
 
-  // Store user socket id
   if (userId) {
-    userSocketMap[userId] = socket.id;   //  FIXED
+    userSocketMap[userId] = socket.id;
   }
 
-  // Send online users list to all clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
-  // Handle disconnect
   socket.on("disconnect", () => {
 
     console.log("User Disconnected:", userId);
 
     delete userSocketMap[userId];
-    //emit online users to all connected clients
+
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
@@ -59,44 +53,35 @@ io.on("connection", (socket) => {
 // Middleware
 app.use(express.json({ limit: "4mb" }));
 
-// app.use(cors({
-//   origin: process.env.CLIENT_URL,
-//   credentials: true
-// }))
-// app.use(cors({
-//   origin: [
-//     "http://localhost:5173",
-//     "https://chatapp-82sr.vercel.app"
-//   ],
-//   credentials: true
-// }))
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    process.env.CLIENT_URL
+  ],
   credentials: true
 }));
 
-// Routes setup
-app.use("/api/status", (req, res) => res.send("Server is Live"));
+// Routes
+app.get("/api/status", (req, res) => {
+  res.send("Server is Live");
+});
+
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
 
 // Connect Database
 await connectDB();
 
-// Start server
+// Start server (Local Development)
+if (process.env.NODE_ENV !== "production") {
 
-if(process.env.NODE_ENV !== "production"){
-const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-  console.log(`Server is running on PORT: ${PORT}`);
-});
+  server.listen(PORT, () => {
+    console.log(`Server is running on PORT: ${PORT}`);
+  });
 
 }
-//export for versal
-export default server;
-// const PORT = process.env.PORT || 5000;
 
-// server.listen(PORT, () => {
-//   console.log(`Server is running on PORT: ${PORT}`);
-// });
+// Export for Vercel
+export default server;
