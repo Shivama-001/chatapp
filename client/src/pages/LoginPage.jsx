@@ -67,6 +67,7 @@ const LoginPage = () => {
   {!isDataSubmitted && (
     <>
       <input
+       autocomplete="off"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         type="email"
@@ -76,7 +77,7 @@ const LoginPage = () => {
       />
 
       <input
-        autoComplete="current-password"
+        autocomplete="off"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         type="password"
@@ -90,6 +91,7 @@ const LoginPage = () => {
   {/* BIO STEP */}
   {currState === "Sign up" && isDataSubmitted && (
     <textarea
+    autocomplete="off"
       onChange={(e) => setBio(e.target.value)}
       value={bio}
       rows={4}
